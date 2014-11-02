@@ -1,10 +1,10 @@
 {
   "name": "lsrepo",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "ls all the git repos info",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bin": {
+    "lsrepo": "index.js"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/coderhaoxin/node-lsrepo/issues"
   },
-  "homepage": "https://github.com/coderhaoxin/node-lsrepo"
+  "homepage": "https://github.com/coderhaoxin/node-lsrepo",
+  "engines": {
+    "node": ">= 0.11.14"
+  },
 }
