@@ -1,0 +1,29 @@
+{
+  "name": "lsrepo",
+  "version": "0.0.0",
+  "description": "ls all the git repos info",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coderhaoxin/node-lsrepo.git"
+  },
+  "keywords": [
+    "command",
+    "repos",
+    "repo",
+    "show",
+    "info",
+    "git",
+    "cmd",
+    "ls"
+  ],
+  "author": "haoxin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coderhaoxin/node-lsrepo/issues"
+  },
+  "homepage": "https://github.com/coderhaoxin/node-lsrepo"
+}
