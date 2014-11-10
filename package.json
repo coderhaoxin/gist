@@ -1,14 +1,14 @@
 {
   "name": "lsrepo",
-  "version": "0.0.1",
-  "description": "ls all the git repos info",
+  "version": "0.1.0",
+  "description": "ls all the git repos info, support filter",
   "main": "index.js",
   "bin": {
     "lsrepo": "index.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/coderhaoxin/node-lsrepo.git"
+    "url": "https://github.com/coderhaoxin/lsrepo.git"
   },
   "keywords": [
     "command",
@@ -23,9 +23,9 @@
   "author": "haoxin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/coderhaoxin/node-lsrepo/issues"
+    "url": "https://github.com/coderhaoxin/lsrepo/issues"
   },
-  "homepage": "https://github.com/coderhaoxin/node-lsrepo",
+  "homepage": "https://github.com/coderhaoxin/lsrepo",
   "engines": {
     "node": ">= 0.11.14"
   }
