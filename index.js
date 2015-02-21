@@ -1,23 +1,30 @@
-#!/usr/bin/env node --harmony
+#!/usr/bin/env iojs
 
 'use strict';
 
-var cp = require('child_process'),
+const cp = require('child_process'),
   params = process.argv.slice(2),
   Path = require('path'),
   resolve = Path.resolve,
   fs = require('fs'),
   os = require('os'),
-  join = Path.join,
-  dir = params[0];
+  join = Path.join;
 
-var YELLOW = '\x1b[33m',
+const YELLOW = '\x1b[33m',
   GREEN = '\x1b[32m',
   RED = '\x1b[31m';
 
-var multiRemote = false, // only show repos with multi remotes
+const usage = `
+  lsrepo anydir --not-clean
+  lsrepo anydir --multi-branch
+  lsrepo anydir --multi-remote
+`;
+
+let printUsage = false,
+  multiRemote = false, // only show repos with multi remotes
   multiBranch = false, // only show repos with multi branches
   notClean = false, // only show repos not clean
+  dir = params[0],
   EOL = os.EOL,
   DEPTH = 6;
 
@@ -27,10 +34,14 @@ if (!dir) {
 }
 
 parseArgv(params);
+if (printUsage) {
+  console.info(usage);
+  process.exit(0);
+}
 
 dir = resolve(process.cwd(), dir);
 
-var repoPaths = dirRepos(dir, DEPTH);
+let repoPaths = dirRepos(dir, DEPTH);
 
 repoPaths.forEach(function(p) {
   getGitRepoInfo(p);
@@ -42,7 +53,7 @@ repoPaths.forEach(function(p) {
 function getGitRepoInfo(dir) {
   process.chdir(dir);
 
-  var remoteInfo = cp.spawnSync('git', ['remote']),
+  let remoteInfo = cp.spawnSync('git', ['remote']),
     branchInfo = cp.spawnSync('git', ['branch']),
     statusInfo = cp.spawnSync('git', ['status']);
 
@@ -58,7 +69,7 @@ function getGitRepoInfo(dir) {
 
 function ignoreRepo(statusInfo, branchInfo, remoteInfo) {
   if (notClean && statusInfo.status === 0) {
-    if (statusInfo.stdout.toString().contains('nothing to commit, working directory clean')) return true;
+    if (statusInfo.stdout.toString().includes('nothing to commit, working directory clean')) return true;
   }
 
   if (multiBranch && branchInfo.status === 0) {
@@ -78,7 +89,7 @@ function log(result, flag) {
     return console.error(RED + result.stderr.toString());
   }
 
-  var COLOUR = '\x1b[3' + (flag + 3) + 'm';
+  let COLOUR = '\x1b[3' + (flag + 3) + 'm';
   console.info(COLOUR + result.stdout.toString());
 }
 
@@ -87,7 +98,7 @@ function log(result, flag) {
  * @return {boolean}
  */
 function notDir(path) {
-  var isDir;
+  let isDir;
 
   try {
     isDir = fs.statSync(path).isDirectory();
@@ -103,7 +114,7 @@ function notDir(path) {
  * @return {boolean}
  */
 function isRepo(dir) {
-  var p = join(dir, '.git');
+  let p = join(dir, '.git');
 
   try {
     fs.statSync(p);
@@ -124,11 +135,11 @@ function dirRepos(path, depth) {
   if (notDir(path)) return [];
   if (isRepo(path)) return [path];
 
-  var names = fs.readdirSync(path),
+  let names = fs.readdirSync(path),
     repos = [];
 
   names.forEach(function(n) {
-    var p = join(path, n);
+    let p = join(path, n);
 
     if (notDir(p)) return;
     if (isRepo(p)) return repos.push(p);
@@ -143,10 +154,11 @@ function dirRepos(path, depth) {
  * @param {array[string]}
  */
 function parseArgv(args) {
-  var contains = function(key) {
+  let contains = function(key) {
     return args.indexOf(key) !== -1;
   };
 
+  if (contains('--help')) printUsage = true;
   if (contains('--not-clean')) notClean = true;
   if (contains('--multi-branch')) multiBranch = true;
   if (contains('--multi-remote')) multiRemote = true;

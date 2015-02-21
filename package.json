@@ -1,6 +1,6 @@
 {
   "name": "lsrepo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "ls all the git repos info, support filter",
   "main": "index.js",
   "bin": {
@@ -27,6 +27,6 @@
   },
   "homepage": "https://github.com/coderhaoxin/lsrepo",
   "engines": {
-    "node": ">= 0.11.14"
+    "iojs": ">= 1.3.0"
   }
 }
