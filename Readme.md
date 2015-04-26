@@ -1,6 +1,6 @@
-[![NPM version][npm-img]][npm-url]
+# deprecated
+
 [![License][license-img]][license-url]
-[![Dependency status][david-img]][david-url]
 
 ### lsrepo
 * too many git repos in the computer ?
@@ -11,7 +11,7 @@
 ### usage
 
 ```sh
-npm install -g lsrepo
+npm install -g coderhaoxin/lsrepo
 ```
 
 run

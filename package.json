@@ -1,5 +1,6 @@
 {
   "name": "lsrepo",
+  "private": true,
   "version": "0.2.0",
   "description": "ls all the git repos info, support filter",
   "main": "index.js",
